@@ -40,7 +40,6 @@ class Module:
 
     def parse_values(self):
         self.id = 34
-        print("my id = " + str(self.id))
 
 
 def get_module_list():
@@ -66,7 +65,7 @@ def get_module_list():
                 lista_suma.insert(i, analog_values[i] + offset_values[i])
                 lista_multi.insert(i, lista_suma[i] * scale_factor_values[i])
         except:
-            print("except module = " + str(number))
+            pass
                 
         modules.append(Module(number, lista_multi))
     
@@ -74,23 +73,19 @@ def get_module_list():
 
 
 if __name__ == "__main__":
+    
     modules = get_module_list()
+    json_string_modules = json.dumps([module.__dict__ for module in modules])
     
-    string_module = ""
-    for module in modules:
-        #string_module = string_module.join(json.dumps(module.__dict__))
-        string_module += json.dumps(module.__dict__)
-        
-    
-    jsonStr = json.dumps([obj.__dict__ for module in modules])
-    print(jsonStr)
+    print(json_string_modules)
+
     
     #open text file
     text_file = open("/home/xavi/Documentos/analog_values.txt", "w")
     #print(string_module)
  
     #write string to file
-    text_file.write(string_module)
+    text_file.write(json_string_modules)
  
     #close file
     text_file.close()
