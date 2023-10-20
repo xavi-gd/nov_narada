@@ -44,34 +44,58 @@ class Module:
 
 
 def get_module_list():
-    numbers = [39, 40, 41, 42, 43]
+    numbers = [39, 40, 41]
+    modules = []
+    
+    scale_factor_values = [0.0100, 0.1000, 0.1000, 0.1000, 0.1000, 1.0000, 1.0000, 1.0000, 0.0001, 1.0000, 0.0001, 0.1000, 10.0000, 1.0000, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 1.0000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 1.0000, 1.0000, 1.0000]
+    offset_values = [0.0, -10000.0, 0.0, -400.0, -400.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -400.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, 0.0, 0.0, 0.0, 0.0]
+    
+
     for number in numbers:
         battery_module = minimalmodbus.Instrument('/dev/ttyUSB0', number)  # port name, slave address (in decimal)
         battery_module.serial.baudrate = "9600"
         battery_module.serial.timeout = 0.5
-        modules = []
-        test = [-1, 0, -2]
-        print(test)
-        scale_factor_values = [0.0100, 0.1000, 0.1000, 0.1000, 0.1000, 1.0000, 1.0000, 1.0000, 0.0001, 1.0000, 0.0001, 0.1000, 10.0000, 1.0000, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 1.0000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 1.0000, 1.0000, 1.0000]
-        offset_values = [0.0, -10000.0, 0.0, -400.0, -400.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -400.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, 0.0, 0.0, 0.0, 0.0]
-
+        
+        lista_suma = [0] * 51
+        lista_multi = [0] * 51
+    
         try:
-            analog_values = battery_module.read_registers(4095, 51, 4, False)
-            print(analog_values)
-                     
-            print("Holaa")
-            arr1 = (analog_values + offset_values)
-            print(arr1)
-            arr2 = arr1 * scale_factor_values
-            print(arr2)
-            modules.append(Module(number, arr1))
+            analog_values = battery_module.read_registers(4095, 51, 4)
+            
+            for i in range(51):
+                lista_suma.insert(i, analog_values[i] + offset_values[i])
+                lista_multi.insert(i, lista_suma[i] * scale_factor_values[i])
         except:
-
-            print("NO!")
-            pass
+            print("except module = " + str(number))
+                
+        modules.append(Module(number, lista_multi))
+    
     return modules
 
 
 if __name__ == "__main__":
     modules = get_module_list()
-
+    
+    string_module = ""
+    for module in modules:
+        #string_module = string_module.join(json.dumps(module.__dict__))
+        string_module += json.dumps(module.__dict__)
+        
+    
+    jsonStr = json.dumps([obj.__dict__ for module in modules])
+    print(jsonStr)
+    
+    #open text file
+    text_file = open("/home/xavi/Documentos/analog_values.txt", "w")
+    #print(string_module)
+ 
+    #write string to file
+    text_file.write(string_module)
+ 
+    #close file
+    text_file.close()
+     
+    #with open('C:\\Users\\BATECNIC01\Documents\\NodeRed\\infoJordi\\pyserial_data.json','w') as write_json:
+    #with open('C:\\Users\\BATECNIC01\Desktop\\pyserial_data.json','w') as write_json:
+     #   json.dump(json_dict, write_json, indent=4)
+    
