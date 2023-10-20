@@ -44,32 +44,35 @@ class Module:
 
 
 def get_module_list():
-    numbers = [39, 40]
+    numbers = [39, 40, 41]
+    modules = []
+    
+    scale_factor_values = [0.0100, 0.1000, 0.1000, 0.1000, 0.1000, 1.0000, 1.0000, 1.0000, 0.0001, 1.0000, 0.0001, 0.1000, 10.0000, 1.0000, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 1.0000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 1.0000, 1.0000, 1.0000]
+    offset_values = [0.0, -10000.0, 0.0, -400.0, -400.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -400.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, 0.0, 0.0, 0.0, 0.0]
+    
+
     for number in numbers:
         battery_module = minimalmodbus.Instrument('/dev/ttyUSB0', number)  # port name, slave address (in decimal)
         battery_module.serial.baudrate = "9600"
         battery_module.serial.timeout = 0.5
-        modules = []
-    
-        scale_factor_values = [0.0100, 0.1000, 0.1000, 0.1000, 0.1000, 1.0000, 1.0000, 1.0000, 0.0001, 1.0000, 0.0001, 0.1000, 10.0000, 1.0000, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 0.0010, 1.0000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 0.1000, 1.0000, 1.0000, 1.0000]
-        offset_values = [0.0, -10000.0, 0.0, -400.0, -400.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -400.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, -400.0, 0.0, 0.0, 0.0, 0.0]
-
-        analog_values = battery_module.read_registers(4095, 51, 4)
-        print(analog_values)
-    
-        lista_suma = []
-        lista_multi = []
-
-        for i in range(len(analog_values)):
-            lista_suma.append(analog_values[i] + offset_values[i])
-            lista_multi.append(lista_suma[i] * scale_factor_values[i])
-            
-            
-        modules.append(Module(number, lista_multi))
         
-        return modules
+        lista_suma = [0] * 51
+        lista_multi = [0] * 51
+    
+        try:
+            analog_values = battery_module.read_registers(4095, 51, 4)
+            
+            for i in range(51):
+                lista_suma.insert(i, analog_values[i] + offset_values[i])
+                lista_multi.insert(i, lista_suma[i] * scale_factor_values[i])
+        except:
+            print("except module = " + str(number))
+                
+        modules.append(Module(number, lista_multi))
+    
+    return modules
 
 
 if __name__ == "__main__":
     modules = get_module_list()
-    print(modules[0].volt)
+    
