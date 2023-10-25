@@ -1,7 +1,9 @@
 import serial
 import minimalmodbus
-import time
+from time import time
 import json
+from pymongo import MongoClient
+import socket
 
 
 class Module:
@@ -22,7 +24,8 @@ class Module:
         FULL_CAPACITY = 47
         CHARGE_TIME = 48
         DISCHARGE_TIME = 49
-
+        
+        self.time = int(time())
         self.id = module_id
         self.volt = module_values[VOLT]
         self.current = module_values[CURRENT]
@@ -37,9 +40,6 @@ class Module:
         self.full_capacity = module_values[FULL_CAPACITY]
         self.charge_time = module_values[CHARGE_TIME]
         self.discharge_time = module_values[DISCHARGE_TIME]
-
-    def parse_values(self):
-        self.id = 34
 
 
 def get_module_list():
@@ -66,7 +66,7 @@ def get_module_list():
                 lista_multi.insert(i, lista_suma[i] * scale_factor_values[i])
         except:
             pass
-                
+
         modules.append(Module(number, lista_multi))
     
     return modules
@@ -77,20 +77,16 @@ if __name__ == "__main__":
     modules = get_module_list()
     json_string_modules = json.dumps([module.__dict__ for module in modules])
     
-    print(json_string_modules)
+    #print(json_string_modules)
 
     
     #open text file
     text_file = open("/home/xavi/Documentos/analog_values.txt", "w")
-    #print(string_module)
+    print(json_string_modules)
  
     #write string to file
     text_file.write(json_string_modules)
  
     #close file
     text_file.close()
-     
-    #with open('C:\\Users\\BATECNIC01\Documents\\NodeRed\\infoJordi\\pyserial_data.json','w') as write_json:
-    #with open('C:\\Users\\BATECNIC01\Desktop\\pyserial_data.json','w') as write_json:
-     #   json.dump(json_dict, write_json, indent=4)
-    
+      
