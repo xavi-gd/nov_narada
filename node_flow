@@ -1,0 +1,436 @@
+[
+    {
+        "id": "1b5f67f7ad635077",
+        "type": "tab",
+        "label": "server",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "53913cc9c594968b",
+        "type": "mongodb4-client",
+        "name": "",
+        "protocol": "mongodb",
+        "hostname": "localhost",
+        "port": "27017",
+        "dbName": "narada",
+        "appName": "",
+        "authSource": "",
+        "authMechanism": "DEFAULT",
+        "tls": false,
+        "tlsCAFile": "",
+        "tlsCertificateKeyFile": "",
+        "tlsInsecure": false,
+        "connectTimeoutMS": "30000",
+        "socketTimeoutMS": "0",
+        "minPoolSize": "0",
+        "maxPoolSize": "100",
+        "maxIdleTimeMS": "0",
+        "uri": "",
+        "advanced": "{}",
+        "uriTabActive": "tab-uri-simple"
+    },
+    {
+        "id": "2a94dcf4a197c16a",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d95c983f646cd4c2",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "070aacdfb3088368",
+        "type": "ui_group",
+        "name": "Valores Generales",
+        "tab": "2a94dcf4a197c16a",
+        "order": 1,
+        "disp": true,
+        "width": "54",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d0f7f1ce1865f46f",
+        "type": "tcp in",
+        "z": "1b5f67f7ad635077",
+        "name": "server",
+        "server": "server",
+        "host": "",
+        "port": "12345",
+        "datamode": "stream",
+        "datatype": "buffer",
+        "newline": "",
+        "topic": "",
+        "trim": false,
+        "base64": false,
+        "tls": "",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "8a4b7b641fcecfc8"
+            ]
+        ]
+    },
+    {
+        "id": "8a4b7b641fcecfc8",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "toASCII",
+        "func": "msg.payload = msg.payload.toString(\"ascii\")\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 100,
+        "wires": [
+            [
+                "36c120148f84e607"
+            ]
+        ]
+    },
+    {
+        "id": "36c120148f84e607",
+        "type": "json",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 450,
+        "y": 100,
+        "wires": [
+            [
+                "0cfb97fd869df32a"
+            ]
+        ]
+    },
+    {
+        "id": "04f86d401dec1ed2",
+        "type": "mongodb4",
+        "z": "1b5f67f7ad635077",
+        "clientNode": "53913cc9c594968b",
+        "mode": "collection",
+        "collection": "datos",
+        "operation": "insertMany",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 810,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0cfb97fd869df32a",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "obj_array",
+        "func": "msg.payload = [[...msg.payload]];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 100,
+        "wires": [
+            [
+                "04f86d401dec1ed2"
+            ]
+        ]
+    },
+    {
+        "id": "61a19e2c204088a3",
+        "type": "ui_date_picker",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "label": "date",
+        "group": "070aacdfb3088368",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "b796a07a4e821e35"
+            ]
+        ]
+    },
+    {
+        "id": "aaafe02e3461177a",
+        "type": "ui_dropdown",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "label": "Horas",
+        "tooltip": "reloj",
+        "place": "Select option",
+        "group": "070aacdfb3088368",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "00:00 - 05:59",
+                "value": 1,
+                "type": "num"
+            },
+            {
+                "label": "06:00 - 11:59",
+                "value": 2,
+                "type": "num"
+            },
+            {
+                "label": "12:00 - 17:59",
+                "value": 3,
+                "type": "num"
+            },
+            {
+                "label": "18:00 - 23:59",
+                "value": 4,
+                "type": "num"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 110,
+        "y": 300,
+        "wires": [
+            [
+                "2461d59387e81e70"
+            ]
+        ]
+    },
+    {
+        "id": "b796a07a4e821e35",
+        "type": "change",
+        "z": "1b5f67f7ad635077",
+        "name": "set_flow_context",
+        "rules": [
+            {
+                "t": "set",
+                "p": "user_date_ts",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "44b857a76e07d658",
+        "type": "mongodb4",
+        "z": "1b5f67f7ad635077",
+        "clientNode": "53913cc9c594968b",
+        "mode": "collection",
+        "collection": "datos",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 690,
+        "y": 300,
+        "wires": [
+            [
+                "f3413bc4ca4c41f1",
+                "1461699dd230f685"
+            ]
+        ]
+    },
+    {
+        "id": "2461d59387e81e70",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "time_range",
+        "func": "const user_date_ts = flow.get(\"user_date_ts\")\nconst user_date = new Date(user_date_ts)\n\nconst user_option = msg.payload\nlet am_limit_ts, pm_limit_ts\n\nswitch (user_option) {\n  case 1:\n    am_limit_ts = user_date.setHours(0,0,0)\n    pm_limit_ts = user_date.setHours(5,59,59)\n    break;\n  case 2:\n      am_limit_ts = user_date.setHours(6,0,0)\n      pm_limit_ts = user_date.setHours(11,59,59)\n    break;\n  case 3:\n      am_limit_ts = user_date.setHours(12,0,0)\n      pm_limit_ts = user_date.setHours(17,59,59)\n    break;\n  case 4:\n      am_limit_ts = user_date.setHours(18,0,0)\n      pm_limit_ts = user_date.setHours(23,59,59)\n}\n\nconst time_array = [am_limit_ts/1000, pm_limit_ts/1000]\nmsg.payload = time_array\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 300,
+        "wires": [
+            [
+                "f73f52b903328274"
+            ]
+        ]
+    },
+    {
+        "id": "f3413bc4ca4c41f1",
+        "type": "debug",
+        "z": "1b5f67f7ad635077",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f73f52b903328274",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "find_query",
+        "func": "const query = [{ time: { $gte: msg.payload[0], $lte: msg.payload[1]} }]\nmsg.payload = query\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 300,
+        "wires": [
+            [
+                "44b857a76e07d658"
+            ]
+        ]
+    },
+    {
+        "id": "1461699dd230f685",
+        "type": "ui_table",
+        "z": "1b5f67f7ad635077",
+        "group": "070aacdfb3088368",
+        "name": "",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 870,
+        "y": 440,
+        "wires": []
+    }
+]
