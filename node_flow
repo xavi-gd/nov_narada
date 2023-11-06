@@ -152,9 +152,9 @@
         "type": "ui_group",
         "name": "Graficos",
         "tab": "2a94dcf4a197c16a",
-        "order": 2,
+        "order": 3,
         "disp": true,
-        "width": "14",
+        "width": "15",
         "collapse": false,
         "className": ""
     },
@@ -251,7 +251,9 @@
         "y": 100,
         "wires": [
             [
-                "04f86d401dec1ed2"
+                "04f86d401dec1ed2",
+                "bb1fa1246c6d00e6",
+                "d8bb605fc70b7a21"
             ]
         ]
     },
@@ -259,7 +261,7 @@
         "id": "b796a07a4e821e35",
         "type": "change",
         "z": "1b5f67f7ad635077",
-        "name": "set_flow_context",
+        "name": "set_user_date_context",
         "rules": [
             {
                 "t": "set",
@@ -274,8 +276,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 310,
-        "y": 200,
+        "x": 320,
+        "y": 340,
         "wires": [
             []
         ]
@@ -292,12 +294,13 @@
         "maxTimeMS": "0",
         "handleDocId": false,
         "name": "",
-        "x": 690,
-        "y": 300,
+        "x": 890,
+        "y": 580,
         "wires": [
             [
-                "66c836030df5f49a",
-                "1461699dd230f685"
+                "1461699dd230f685",
+                "2d5929cd23d4dcd3",
+                "aca79a9b73e5e46a"
             ]
         ]
     },
@@ -306,18 +309,18 @@
         "type": "function",
         "z": "1b5f67f7ad635077",
         "name": "time_range",
-        "func": "const user_date_ts = flow.get(\"user_date_ts\")\nconst user_date = new Date(user_date_ts)\n\nconst user_option = msg.payload\nlet am_limit_ts, pm_limit_ts\n\nswitch (user_option) {\n  case 1:\n    am_limit_ts = user_date.setHours(0,0,0)\n    pm_limit_ts = user_date.setHours(5,59,59)\n    break;\n  case 2:\n      am_limit_ts = user_date.setHours(6,0,0)\n      pm_limit_ts = user_date.setHours(11,59,59)\n    break;\n  case 3:\n      am_limit_ts = user_date.setHours(12,0,0)\n      pm_limit_ts = user_date.setHours(17,59,59)\n    break;\n  case 4:\n      am_limit_ts = user_date.setHours(18,0,0)\n      pm_limit_ts = user_date.setHours(23,59,59)\n}\n\nconst time_array = [am_limit_ts/1000, pm_limit_ts/1000]\nmsg.payload = time_array\n\nreturn msg;",
+        "func": "const user_date_ts = flow.get(\"user_date_ts\")\nconst user_date = new Date(user_date_ts)\n\nconst user_option = msg.topic\nlet am_limit_ts, pm_limit_ts\n\nswitch (flow.get(\"user_time\")) {\n  case 1:\n    am_limit_ts = user_date.setHours(0,0,0)\n    pm_limit_ts = user_date.setHours(5,59,59)\n    break;\n  case 2:\n      am_limit_ts = user_date.setHours(6,0,0)\n      pm_limit_ts = user_date.setHours(11,59,59)\n    break;\n  case 3:\n      am_limit_ts = user_date.setHours(12,0,0)\n      pm_limit_ts = user_date.setHours(17,59,59)\n    break;\n  case 4:\n      am_limit_ts = user_date.setHours(18,0,0)\n      pm_limit_ts = user_date.setHours(23,59,59)\n}\n\nconst time_array = [am_limit_ts/1000, pm_limit_ts/1000]\nmsg.payload = time_array\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 290,
-        "y": 300,
+        "x": 310,
+        "y": 500,
         "wires": [
             [
-                "f73f52b903328274"
+                "7062a1ef523f97a1"
             ]
         ]
     },
@@ -325,16 +328,16 @@
         "id": "f73f52b903328274",
         "type": "function",
         "z": "1b5f67f7ad635077",
-        "name": "find_query",
-        "func": "const query = [{ time: { $gte: msg.payload[0], $lte: msg.payload[1]} }]\nmsg.payload = query\nreturn msg;\n",
+        "name": "find_module_query",
+        "func": "const user_module = parseInt(msg.topic, 10)\nconst query = [{ id: msg.topic, time: { $gte: msg.payload[0], $lte: msg.payload[1]} }]\nmsg.payload = query\nmsg.test = msg.id\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 510,
-        "y": 300,
+        "x": 710,
+        "y": 580,
         "wires": [
             [
                 "44b857a76e07d658"
@@ -345,7 +348,7 @@
         "id": "66c836030df5f49a",
         "type": "function",
         "z": "1b5f67f7ad635077",
-        "name": "function 1",
+        "name": "split_by_id",
         "func": "const modules = msg.payload\nconst volt = [], current = []\nconst labels = []\n\nfunction split_by_id(modules) {\n    const modules_by_id = {}\n\n    modules.forEach((module) => {\n        if (!modules_by_id[module.id]) {\n            modules_by_id[module.id] = [];\n        }\n    modules_by_id[module.id].push(module);\n    })\n\n    return Object.values(modules_by_id);\n}\n\nmsg.payload = split_by_id(modules);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -353,13 +356,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 660,
-        "y": 540,
+        "x": 1090,
+        "y": 440,
         "wires": [
             [
-                "16acb2a5941ebe61",
-                "7a16074ee72dd1c2",
-                "5086cf4e8b990321"
+                "16acb2a5941ebe61"
             ]
         ]
     },
@@ -372,7 +373,7 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "label": "master_chart",
+        "label": "Grafico",
         "chartType": "line",
         "legend": "false",
         "xformat": "HH:mm",
@@ -401,8 +402,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 1170,
-        "y": 540,
+        "x": 1480,
+        "y": 600,
         "wires": [
             []
         ]
@@ -447,11 +448,11 @@
         "topic": "topic",
         "topicType": "msg",
         "className": "",
-        "x": 110,
-        "y": 300,
+        "x": 510,
+        "y": 340,
         "wires": [
             [
-                "2461d59387e81e70"
+                "9f1636ab8f4039d1"
             ]
         ]
     },
@@ -470,7 +471,7 @@
         "topicType": "msg",
         "className": "",
         "x": 110,
-        "y": 200,
+        "y": 340,
         "wires": [
             [
                 "b796a07a4e821e35"
@@ -481,23 +482,12 @@
         "id": "1461699dd230f685",
         "type": "ui_table",
         "z": "1b5f67f7ad635077",
-        "d": true,
-        "group": "070aacdfb3088368",
-        "name": "",
-        "order": 3,
-        "width": "6",
-        "height": "6",
+        "group": "b3b18b46f769a03f",
+        "name": "Tabla",
+        "order": 2,
+        "width": "0",
+        "height": "0",
         "columns": [
-            {
-                "field": "id",
-                "title": "ID",
-                "width": "",
-                "align": "left",
-                "formatter": "plaintext",
-                "formatterParams": {
-                    "target": "_blank"
-                }
-            },
             {
                 "field": "time",
                 "title": "Time",
@@ -509,8 +499,8 @@
                 }
             },
             {
-                "field": "volt",
-                "title": "Volt",
+                "field": "soc",
+                "title": "soc",
                 "width": "",
                 "align": "left",
                 "formatter": "plaintext",
@@ -521,19 +511,17 @@
         ],
         "outputs": 1,
         "cts": true,
-        "x": 870,
-        "y": 300,
+        "x": 1090,
+        "y": 680,
         "wires": [
-            [
-                "c558c359f8e2d2df"
-            ]
+            []
         ]
     },
     {
         "id": "16acb2a5941ebe61",
         "type": "function",
         "z": "1b5f67f7ad635077",
-        "name": "master_chart_data",
+        "name": "general_chart_data",
         "func": "function set_chart_values(arrayDeArrays) {\n    const volt = [], current = [], time = [];\n\n    for (const objeto of arrayDeArrays) {\n        volt.push(objeto.volt);\n        current.push(objeto.current);\n        time.push(objeto.time)\n    }\n    return [volt, current, time]\n}\n\nfunction obtenerHoraYMinutos(timestamp) {\n    const fecha = new Date(timestamp);\n    const horas = fecha.getHours();\n    const minutos = fecha.getMinutes();\n    return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;\n}\n\nconst master = set_chart_values(msg.payload[0])\nconst slave = set_chart_values(msg.payload[1])\n\nmsg.payload=[{\n    \"series\": [\"volt\", \"current\" ],\n    \"data\": [ master[0], master[1] ],\n    \"labels\": master[2]\n}];\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -541,8 +529,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 910,
-        "y": 540,
+        "x": 1310,
+        "y": 440,
         "wires": [
             [
                 "44f274b32a5521f6"
@@ -550,7 +538,250 @@
         ]
     },
     {
-        "id": "c558c359f8e2d2df",
+        "id": "0226e4b052c6765c",
+        "type": "ui_button",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "group": "070aacdfb3088368",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Search",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "user_module",
+        "topicType": "flow",
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "2461d59387e81e70"
+            ]
+        ]
+    },
+    {
+        "id": "544c25cc5768ce35",
+        "type": "ui_dropdown",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "label": "Modulos",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "070aacdfb3088368",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "ALL PACKS",
+                "value": 47,
+                "type": "num"
+            },
+            {
+                "label": "PACK 1",
+                "value": 39,
+                "type": "num"
+            },
+            {
+                "label": "PACK 2",
+                "value": 40,
+                "type": "num"
+            },
+            {
+                "label": "PACK 3",
+                "value": 41,
+                "type": "num"
+            },
+            {
+                "label": "PACK 4",
+                "value": 42,
+                "type": "num"
+            },
+            {
+                "label": "PACK 5",
+                "value": 43,
+                "type": "num"
+            },
+            {
+                "label": "PACK 6",
+                "value": 44,
+                "type": "num"
+            },
+            {
+                "label": "PACK 7",
+                "value": 45,
+                "type": "num"
+            },
+            {
+                "label": "PACK 8",
+                "value": 46,
+                "type": "num"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 920,
+        "y": 340,
+        "wires": [
+            [
+                "9f29e3120982b9fc"
+            ]
+        ]
+    },
+    {
+        "id": "9f1636ab8f4039d1",
+        "type": "change",
+        "z": "1b5f67f7ad635077",
+        "name": "set_user_time_context",
+        "rules": [
+            {
+                "t": "set",
+                "p": "user_time",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f29e3120982b9fc",
+        "type": "change",
+        "z": "1b5f67f7ad635077",
+        "name": "set_user_module_context",
+        "rules": [
+            {
+                "t": "set",
+                "p": "user_module",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1150,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d5929cd23d4dcd3",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "module_chart_data",
+        "func": "function set_chart_values(arrayDeArrays) {\n    const soc = [], time = []\n\n    for (const objeto of arrayDeArrays) {\n        soc.push(objeto.soc)\n        time.push(objeto.time)\n    }\n    return [soc, time]\n}\n\nfunction obtenerHoraYMinutos(timestamp) {\n    const fecha = new Date(timestamp);\n    const horas = fecha.getHours();\n    const minutos = fecha.getMinutes();\n    return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;\n}\n\nconst user_module = set_chart_values(msg.payload)\n\nmsg.payload=[{\n    \"series\": [\"volt\"],\n    \"data\": [user_module[0]],\n    \"labels\": user_module[1]\n}];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1090,
+        "y": 580,
+        "wires": [
+            [
+                "44f274b32a5521f6"
+            ]
+        ]
+    },
+    {
+        "id": "544423434b006518",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "find_rack_query",
+        "func": "const query = [{ time: { $gte: msg.payload[0], $lte: msg.payload[1]} }]\nmsg.payload = query\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 440,
+        "wires": [
+            [
+                "30972578ddc90719"
+            ]
+        ]
+    },
+    {
+        "id": "30972578ddc90719",
+        "type": "mongodb4",
+        "z": "1b5f67f7ad635077",
+        "clientNode": "53913cc9c594968b",
+        "mode": "collection",
+        "collection": "datos",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "find_general",
+        "x": 890,
+        "y": 440,
+        "wires": [
+            [
+                "66c836030df5f49a",
+                "1461699dd230f685"
+            ]
+        ]
+    },
+    {
+        "id": "7062a1ef523f97a1",
+        "type": "switch",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "47",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 500,
+        "wires": [
+            [
+                "544423434b006518"
+            ],
+            [
+                "f73f52b903328274"
+            ]
+        ]
+    },
+    {
+        "id": "aca79a9b73e5e46a",
         "type": "debug",
         "z": "1b5f67f7ad635077",
         "name": "debug 1",
@@ -561,134 +792,98 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1080,
-        "y": 300,
+        "x": 1290,
+        "y": 500,
         "wires": []
     },
     {
-        "id": "7a16074ee72dd1c2",
+        "id": "e3ea095958a28e60",
+        "type": "ui_table",
+        "z": "1b5f67f7ad635077",
+        "group": "070aacdfb3088368",
+        "name": "Registro de Alarmas",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 180,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "bb1fa1246c6d00e6",
+        "type": "debug",
+        "z": "1b5f67f7ad635077",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d8bb605fc70b7a21",
         "type": "function",
         "z": "1b5f67f7ad635077",
-        "name": "slave1_chart_data",
-        "func": "function set_chart_values(arrayDeArrays) {\n    const volt = [], current = [], time = [];\n\n    for (const objeto of arrayDeArrays) {\n        volt.push(objeto.volt);\n        current.push(objeto.current);\n        time.push(objeto.time)\n    }\n    return [volt, current, time]\n}\n\nfunction obtenerHoraYMinutos(timestamp) {\n    const fecha = new Date(timestamp);\n    const horas = fecha.getHours();\n    const minutos = fecha.getMinutes();\n    return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;\n}\n\nconst slave = set_chart_values(msg.payload[1])\n\nmsg.payload=[{\n    \"series\": [\"volt\", \"current\" ],\n    \"data\": [ slave[0], slave[1] ],\n    \"labels\": slave[2]\n}];\n\nreturn msg;",
+        "name": "get_module_alarms",
+        "func": "\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 910,
-        "y": 640,
+        "x": 850,
+        "y": 220,
         "wires": [
             []
         ]
     },
     {
-        "id": "9bc30d0d0f8c1158",
-        "type": "ui_chart",
+        "id": "ce890027948a481c",
+        "type": "switch",
         "z": "1b5f67f7ad635077",
-        "name": "slave1_chart",
-        "group": "b3b18b46f769a03f",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "label": "modulo 40",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": true,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#ff0000",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            }
         ],
+        "checkall": "true",
+        "repair": false,
         "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 1170,
-        "y": 640,
+        "x": 1370,
+        "y": 120,
         "wires": [
             []
         ]
     },
     {
-        "id": "5086cf4e8b990321",
-        "type": "function",
+        "id": "1b159a12a677bf73",
+        "type": "e-mail",
         "z": "1b5f67f7ad635077",
-        "name": "slave1_chart_data",
-        "func": "function set_chart_values(arrayDeArrays) {\n    const volt = [], current = [], time = [];\n\n    for (const objeto of arrayDeArrays) {\n        volt.push(objeto.volt);\n        current.push(objeto.current);\n        time.push(objeto.time)\n    }\n    return [volt, current, time]\n}\n\nfunction obtenerHoraYMinutos(timestamp) {\n    const fecha = new Date(timestamp);\n    const horas = fecha.getHours();\n    const minutos = fecha.getMinutes();\n    return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;\n}\n\nconst slave = set_chart_values([])\n\nmsg.payload=[{\n    \"series\": [\"volt\", \"current\" ],\n    \"data\": [ slave[0], slave[1] ],\n    \"labels\": slave[2]\n}];\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 910,
-        "y": 740,
-        "wires": [
-            [
-                "9bc30d0d0f8c1158"
-            ]
-        ]
-    },
-    {
-        "id": "818d27f1cea6e4f4",
-        "type": "ui_chart",
-        "z": "1b5f67f7ad635077",
-        "name": "slave1_chart",
-        "group": "b3b18b46f769a03f",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "label": "modulo 40",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": true,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#ff0000",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 1170,
-        "y": 740,
-        "wires": [
-            []
-        ]
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": false,
+        "name": "xavier.garrigos.tempelgroup@gmail.com",
+        "dname": "",
+        "x": 540,
+        "y": 700,
+        "wires": []
     }
 ]
