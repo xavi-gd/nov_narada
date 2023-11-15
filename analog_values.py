@@ -2,7 +2,6 @@ import serial
 import minimalmodbus
 from time import time
 import json
-from pymongo import MongoClient
 import socket
 
 
