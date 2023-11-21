@@ -34,8 +34,9 @@
     {
         "id": "2a94dcf4a197c16a",
         "type": "ui_tab",
-        "name": "Home",
+        "name": "Tempel Group",
         "icon": "dashboard",
+        "order": 1,
         "disabled": false,
         "hidden": false
     },
@@ -43,7 +44,7 @@
         "id": "d95c983f646cd4c2",
         "type": "ui_base",
         "theme": {
-            "name": "theme-light",
+            "name": "theme-custom",
             "lightTheme": {
                 "default": "#0094CE",
                 "baseColor": "#0094CE",
@@ -55,23 +56,25 @@
                 "default": "#097479",
                 "baseColor": "#097479",
                 "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false
+                "edited": true,
+                "reset": false
             },
             "customTheme": {
                 "name": "Untitled Theme 1",
                 "default": "#4B7930",
-                "baseColor": "#4B7930",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                "baseColor": "#ffffff",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
             },
             "themeState": {
                 "base-color": {
-                    "default": "#0094CE",
-                    "value": "#0094CE",
-                    "edited": false
+                    "default": "#ffffff",
+                    "value": "#ffffff",
+                    "edited": true
                 },
                 "page-titlebar-backgroundColor": {
-                    "value": "#0094CE",
-                    "edited": false
+                    "value": "#808285",
+                    "edited": true
                 },
                 "page-backgroundColor": {
                     "value": "#fafafa",
@@ -82,24 +85,24 @@
                     "edited": false
                 },
                 "group-textColor": {
-                    "value": "#1bbfff",
-                    "edited": false
+                    "value": "#ffffff",
+                    "edited": true
                 },
                 "group-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
+                    "value": "#bcbec0",
+                    "edited": true
                 },
                 "group-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
+                    "value": "#bcbec0",
+                    "edited": true
                 },
                 "widget-textColor": {
-                    "value": "#111111",
-                    "edited": false
+                    "value": "#000000",
+                    "edited": true
                 },
                 "widget-backgroundColor": {
-                    "value": "#0094ce",
-                    "edited": false
+                    "value": "#808285",
+                    "edited": true
                 },
                 "widget-borderColor": {
                     "value": "#ffffff",
@@ -127,7 +130,7 @@
             "sizes": {
                 "sx": 48,
                 "sy": 48,
-                "gx": 6,
+                "gx": 10,
                 "gy": 6,
                 "cx": 6,
                 "cy": 6,
@@ -143,7 +146,7 @@
         "tab": "2a94dcf4a197c16a",
         "order": 1,
         "disp": true,
-        "width": "4",
+        "width": 4,
         "collapse": false,
         "className": ""
     },
@@ -152,9 +155,59 @@
         "type": "ui_group",
         "name": "Graficos",
         "tab": "2a94dcf4a197c16a",
+        "order": 2,
+        "disp": true,
+        "width": 18,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3ad2bc4a7ed3c9a3",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "22c859d636852368",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "22c859d636852368",
+        "type": "ui_tab",
+        "name": "Away",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "63d44542e6e1ae80",
+        "type": "ui_group",
+        "name": "Logs de Alarmas",
+        "tab": "2a94dcf4a197c16a",
         "order": 3,
         "disp": true,
-        "width": "15",
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4ff41e5b8c1dd25e",
+        "type": "ui_tab",
+        "name": "Cells",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "26daf5f7e0a21c1c",
+        "type": "ui_group",
+        "name": "Celdas",
+        "tab": "4ff41e5b8c1dd25e",
+        "order": 1,
+        "disp": true,
+        "width": "6",
         "collapse": false,
         "className": ""
     },
@@ -173,8 +226,8 @@
         "trim": false,
         "base64": false,
         "tls": "",
-        "x": 110,
-        "y": 100,
+        "x": 90,
+        "y": 320,
         "wires": [
             [
                 "8a4b7b641fcecfc8"
@@ -193,11 +246,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 100,
+        "x": 260,
+        "y": 320,
         "wires": [
             [
-                "36c120148f84e607"
+                "36c120148f84e607",
+                "f336053cd1051fb1"
             ]
         ]
     },
@@ -209,11 +263,12 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 450,
-        "y": 100,
+        "x": 430,
+        "y": 320,
         "wires": [
             [
-                "0cfb97fd869df32a"
+                "0cfb97fd869df32a",
+                "94071b19ccea0111"
             ]
         ]
     },
@@ -229,17 +284,19 @@
         "maxTimeMS": "0",
         "handleDocId": false,
         "name": "",
-        "x": 810,
-        "y": 100,
+        "x": 870,
+        "y": 380,
         "wires": [
-            []
+            [
+                "0226e4b052c6765c"
+            ]
         ]
     },
     {
         "id": "0cfb97fd869df32a",
         "type": "function",
         "z": "1b5f67f7ad635077",
-        "name": "obj_array",
+        "name": "insert_DB_format",
         "func": "msg.payload = [[...msg.payload]];\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -247,13 +304,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 620,
-        "y": 100,
+        "x": 650,
+        "y": 380,
         "wires": [
             [
-                "04f86d401dec1ed2",
-                "bb1fa1246c6d00e6",
-                "d8bb605fc70b7a21"
+                "04f86d401dec1ed2"
             ]
         ]
     },
@@ -276,8 +331,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 320,
-        "y": 340,
+        "x": 300,
+        "y": 100,
         "wires": [
             []
         ]
@@ -294,13 +349,11 @@
         "maxTimeMS": "0",
         "handleDocId": false,
         "name": "",
-        "x": 890,
-        "y": 580,
+        "x": 710,
+        "y": 560,
         "wires": [
             [
-                "1461699dd230f685",
-                "2d5929cd23d4dcd3",
-                "aca79a9b73e5e46a"
+                "f9aa32fd91fe5564"
             ]
         ]
     },
@@ -316,11 +369,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 310,
-        "y": 500,
+        "x": 290,
+        "y": 560,
         "wires": [
             [
-                "7062a1ef523f97a1"
+                "f73f52b903328274"
             ]
         ]
     },
@@ -329,83 +382,19 @@
         "type": "function",
         "z": "1b5f67f7ad635077",
         "name": "find_module_query",
-        "func": "const user_module = parseInt(msg.topic, 10)\nconst query = [{ id: msg.topic, time: { $gte: msg.payload[0], $lte: msg.payload[1]} }]\nmsg.payload = query\nmsg.test = msg.id\nreturn msg;\n",
+        "func": "const user_module = parseInt(msg.topic, 10)\nconst query = [{ id: msg.topic, time: { $gte: msg.payload[0], $lte: msg.payload[1]} }]\nmsg.payload = query\n\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 710,
-        "y": 580,
+        "x": 510,
+        "y": 560,
         "wires": [
             [
                 "44b857a76e07d658"
             ]
-        ]
-    },
-    {
-        "id": "66c836030df5f49a",
-        "type": "function",
-        "z": "1b5f67f7ad635077",
-        "name": "split_by_id",
-        "func": "const modules = msg.payload\nconst volt = [], current = []\nconst labels = []\n\nfunction split_by_id(modules) {\n    const modules_by_id = {}\n\n    modules.forEach((module) => {\n        if (!modules_by_id[module.id]) {\n            modules_by_id[module.id] = [];\n        }\n    modules_by_id[module.id].push(module);\n    })\n\n    return Object.values(modules_by_id);\n}\n\nmsg.payload = split_by_id(modules);\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1090,
-        "y": 440,
-        "wires": [
-            [
-                "16acb2a5941ebe61"
-            ]
-        ]
-    },
-    {
-        "id": "44f274b32a5521f6",
-        "type": "ui_chart",
-        "z": "1b5f67f7ad635077",
-        "name": "",
-        "group": "b3b18b46f769a03f",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "label": "Grafico",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": true,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#ff0000",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 1480,
-        "y": 600,
-        "wires": [
-            []
         ]
     },
     {
@@ -448,8 +437,8 @@
         "topic": "topic",
         "topicType": "msg",
         "className": "",
-        "x": 510,
-        "y": 340,
+        "x": 490,
+        "y": 100,
         "wires": [
             [
                 "9f1636ab8f4039d1"
@@ -470,8 +459,8 @@
         "topic": "topic",
         "topicType": "msg",
         "className": "",
-        "x": 110,
-        "y": 340,
+        "x": 90,
+        "y": 100,
         "wires": [
             [
                 "b796a07a4e821e35"
@@ -485,13 +474,33 @@
         "group": "b3b18b46f769a03f",
         "name": "Tabla",
         "order": 2,
-        "width": "0",
-        "height": "0",
+        "width": 18,
+        "height": 4,
         "columns": [
             {
                 "field": "time",
                 "title": "Time",
-                "width": "",
+                "width": "70",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "volt",
+                "title": "V",
+                "width": "45",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "current",
+                "title": "A",
+                "width": "45",
                 "align": "left",
                 "formatter": "plaintext",
                 "formatterParams": {
@@ -500,7 +509,77 @@
             },
             {
                 "field": "soc",
-                "title": "soc",
+                "title": "SOC",
+                "width": "65",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "soh",
+                "title": "SOH",
+                "width": "65",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "env_temp",
+                "title": "Temp",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "avg_cell_temp",
+                "title": "Cell T",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "protection_flag",
+                "title": "Protection",
+                "width": "",
+                "align": "left",
+                "formatter": "traffic",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "remain_capacity",
+                "title": "Carga",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "charge_time",
+                "title": "Carga",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "discharge_time",
+                "title": "Desc",
                 "width": "",
                 "align": "left",
                 "formatter": "plaintext",
@@ -509,33 +588,11 @@
                 }
             }
         ],
-        "outputs": 1,
-        "cts": true,
-        "x": 1090,
-        "y": 680,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "16acb2a5941ebe61",
-        "type": "function",
-        "z": "1b5f67f7ad635077",
-        "name": "general_chart_data",
-        "func": "function set_chart_values(arrayDeArrays) {\n    const volt = [], current = [], time = [];\n\n    for (const objeto of arrayDeArrays) {\n        volt.push(objeto.volt);\n        current.push(objeto.current);\n        time.push(objeto.time)\n    }\n    return [volt, current, time]\n}\n\nfunction obtenerHoraYMinutos(timestamp) {\n    const fecha = new Date(timestamp);\n    const horas = fecha.getHours();\n    const minutos = fecha.getMinutes();\n    return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;\n}\n\nconst master = set_chart_values(msg.payload[0])\nconst slave = set_chart_values(msg.payload[1])\n\nmsg.payload=[{\n    \"series\": [\"volt\", \"current\" ],\n    \"data\": [ master[0], master[1] ],\n    \"labels\": master[2]\n}];\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1310,
-        "y": 440,
-        "wires": [
-            [
-                "44f274b32a5521f6"
-            ]
-        ]
+        "outputs": 0,
+        "cts": false,
+        "x": 1330,
+        "y": 500,
+        "wires": []
     },
     {
         "id": "0226e4b052c6765c",
@@ -546,8 +603,8 @@
         "order": 4,
         "width": 0,
         "height": 0,
-        "passthru": false,
-        "label": "Search",
+        "passthru": true,
+        "label": "Buscar",
         "tooltip": "",
         "color": "",
         "bgcolor": "",
@@ -557,8 +614,8 @@
         "payloadType": "date",
         "topic": "user_module",
         "topicType": "flow",
-        "x": 120,
-        "y": 500,
+        "x": 100,
+        "y": 560,
         "wires": [
             [
                 "2461d59387e81e70"
@@ -571,7 +628,7 @@
         "z": "1b5f67f7ad635077",
         "name": "",
         "label": "Modulos",
-        "tooltip": "",
+        "tooltip": "seleccionar modulo",
         "place": "Select option",
         "group": "070aacdfb3088368",
         "order": 3,
@@ -581,47 +638,47 @@
         "multiple": false,
         "options": [
             {
-                "label": "ALL PACKS",
-                "value": 47,
+                "label": "Todos",
+                "value": 37,
                 "type": "num"
             },
             {
-                "label": "PACK 1",
+                "label": "Modulo 1",
                 "value": 39,
                 "type": "num"
             },
             {
-                "label": "PACK 2",
+                "label": "Modulo 2",
                 "value": 40,
                 "type": "num"
             },
             {
-                "label": "PACK 3",
+                "label": "Modulo 3",
                 "value": 41,
                 "type": "num"
             },
             {
-                "label": "PACK 4",
+                "label": "Modulo 4",
                 "value": 42,
                 "type": "num"
             },
             {
-                "label": "PACK 5",
+                "label": "Modulo 5",
                 "value": 43,
                 "type": "num"
             },
             {
-                "label": "PACK 6",
+                "label": "Modulo 6",
                 "value": 44,
                 "type": "num"
             },
             {
-                "label": "PACK 7",
+                "label": "Modulo 7",
                 "value": 45,
                 "type": "num"
             },
             {
-                "label": "PACK 8",
+                "label": "Modulo 8",
                 "value": 46,
                 "type": "num"
             }
@@ -630,8 +687,8 @@
         "topic": "topic",
         "topicType": "msg",
         "className": "",
-        "x": 920,
-        "y": 340,
+        "x": 900,
+        "y": 100,
         "wires": [
             [
                 "9f29e3120982b9fc"
@@ -657,8 +714,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 720,
-        "y": 340,
+        "x": 700,
+        "y": 100,
         "wires": [
             []
         ]
@@ -682,191 +739,78 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1150,
-        "y": 340,
+        "x": 1130,
+        "y": 100,
         "wires": [
             []
         ]
     },
     {
-        "id": "2d5929cd23d4dcd3",
-        "type": "function",
-        "z": "1b5f67f7ad635077",
-        "name": "module_chart_data",
-        "func": "function set_chart_values(arrayDeArrays) {\n    const soc = [], time = []\n\n    for (const objeto of arrayDeArrays) {\n        soc.push(objeto.soc)\n        time.push(objeto.time)\n    }\n    return [soc, time]\n}\n\nfunction obtenerHoraYMinutos(timestamp) {\n    const fecha = new Date(timestamp);\n    const horas = fecha.getHours();\n    const minutos = fecha.getMinutes();\n    return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;\n}\n\nconst user_module = set_chart_values(msg.payload)\n\nmsg.payload=[{\n    \"series\": [\"volt\"],\n    \"data\": [user_module[0]],\n    \"labels\": user_module[1]\n}];\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1090,
-        "y": 580,
-        "wires": [
-            [
-                "44f274b32a5521f6"
-            ]
-        ]
-    },
-    {
-        "id": "544423434b006518",
-        "type": "function",
-        "z": "1b5f67f7ad635077",
-        "name": "find_rack_query",
-        "func": "const query = [{ time: { $gte: msg.payload[0], $lte: msg.payload[1]} }]\nmsg.payload = query\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 700,
-        "y": 440,
-        "wires": [
-            [
-                "30972578ddc90719"
-            ]
-        ]
-    },
-    {
-        "id": "30972578ddc90719",
-        "type": "mongodb4",
-        "z": "1b5f67f7ad635077",
-        "clientNode": "53913cc9c594968b",
-        "mode": "collection",
-        "collection": "datos",
-        "operation": "find",
-        "output": "toArray",
-        "maxTimeMS": "0",
-        "handleDocId": false,
-        "name": "find_general",
-        "x": 890,
-        "y": 440,
-        "wires": [
-            [
-                "66c836030df5f49a",
-                "1461699dd230f685"
-            ]
-        ]
-    },
-    {
-        "id": "7062a1ef523f97a1",
-        "type": "switch",
-        "z": "1b5f67f7ad635077",
-        "name": "",
-        "property": "topic",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "47",
-                "vt": "num"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 490,
-        "y": 500,
-        "wires": [
-            [
-                "544423434b006518"
-            ],
-            [
-                "f73f52b903328274"
-            ]
-        ]
-    },
-    {
-        "id": "aca79a9b73e5e46a",
-        "type": "debug",
-        "z": "1b5f67f7ad635077",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1290,
-        "y": 500,
-        "wires": []
-    },
-    {
         "id": "e3ea095958a28e60",
         "type": "ui_table",
         "z": "1b5f67f7ad635077",
-        "group": "070aacdfb3088368",
+        "group": "63d44542e6e1ae80",
         "name": "Registro de Alarmas",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "columns": [],
+        "order": 1,
+        "width": 8,
+        "height": 4,
+        "columns": [
+            {
+                "field": "time",
+                "title": "Time",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "id",
+                "title": "ID",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "protection_flag",
+                "title": "Protection",
+                "width": "",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
         "outputs": 0,
         "cts": false,
-        "x": 180,
-        "y": 740,
-        "wires": []
-    },
-    {
-        "id": "bb1fa1246c6d00e6",
-        "type": "debug",
-        "z": "1b5f67f7ad635077",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 890,
-        "y": 160,
+        "x": 1900,
+        "y": 400,
         "wires": []
     },
     {
         "id": "d8bb605fc70b7a21",
         "type": "function",
         "z": "1b5f67f7ad635077",
-        "name": "get_module_alarms",
-        "func": "\nreturn msg;",
+        "name": "set_module_alarms",
+        "func": "let module_alarms = msg.payload.map(({ time, id, protection_flag }) => ({ time, id, protection_flag }));\n\nmsg.payload = module_alarms\n\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 850,
-        "y": 220,
+        "x": 1230,
+        "y": 260,
         "wires": [
-            []
-        ]
-    },
-    {
-        "id": "ce890027948a481c",
-        "type": "switch",
-        "z": "1b5f67f7ad635077",
-        "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 1370,
-        "y": 120,
-        "wires": [
-            []
+            [
+                "bb2f5f81325c3433",
+                "ee3e11782327efe4"
+            ]
         ]
     },
     {
@@ -882,8 +826,445 @@
         "tls": false,
         "name": "xavier.garrigos.tempelgroup@gmail.com",
         "dname": "",
-        "x": 540,
-        "y": 700,
+        "x": 1400,
+        "y": 200,
         "wires": []
+    },
+    {
+        "id": "d0d59e1ca522a234",
+        "type": "comment",
+        "z": "1b5f67f7ad635077",
+        "name": "USUARIO",
+        "info": "",
+        "x": 100,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "94071b19ccea0111",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "obj_array",
+        "func": "msg.payload = [...msg.payload];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 260,
+        "wires": [
+            [
+                "21e32e0ac649e517"
+            ]
+        ]
+    },
+    {
+        "id": "f9aa32fd91fe5564",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "timestamp_to_date",
+        "func": "msg.payload.forEach(module => {\n    let fecha = new Date(module.time * 1000); // Convierte el timestamp a milisegundos\n    let horas = (\"0\" + fecha.getHours()).slice(-2); // Obtiene las horas con dos dígitos\n    let minutos = (\"0\" + fecha.getMinutes()).slice(-2); // Obtiene los minutos con dos dígitos\n    module.time = horas + \":\" + minutos; // Modifica el atributo time con el formato HH:MM\n  })\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 560,
+        "wires": [
+            [
+                "e0510c9c976ecb6a"
+            ]
+        ]
+    },
+    {
+        "id": "21e32e0ac649e517",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "timestamp_to_date",
+        "func": "msg.payload.forEach(module => {\n    let fecha = new Date(module.time * 1000); // Convierte el timestamp a milisegundos\n    let horas = (\"0\" + fecha.getHours()).slice(-2); // Obtiene las horas con dos dígitos\n    let minutos = (\"0\" + fecha.getMinutes()).slice(-2); // Obtiene los minutos con dos dígitos\n    module.time = horas + \":\" + minutos; // Modifica el atributo time con el formato HH:MM\n  })\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 260,
+        "wires": [
+            [
+                "4fa49c9bbfe372a0"
+            ]
+        ]
+    },
+    {
+        "id": "bb2f5f81325c3433",
+        "type": "change",
+        "z": "1b5f67f7ad635077",
+        "name": "set_module_alarms_context",
+        "rules": [
+            {
+                "t": "set",
+                "p": "module_alarms",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1480,
+        "y": 260,
+        "wires": [
+            [
+                "8dd684cd3bd7a538",
+                "ee3e11782327efe4"
+            ]
+        ]
+    },
+    {
+        "id": "a2d54372103430a0",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "module_chart_data",
+        "func": "function set_chart_values(arrayDeArrays) {\n    const volt = [], time = []\n\n    for (const objeto of arrayDeArrays) {\n        volt.push(objeto.volt)\n        time.push(objeto.time)\n    }\n    return [volt, time]\n}\n\nconst user_module = set_chart_values(msg.payload)\n\nmsg.payload=[{\n    \"series\": [\"Volt\"],\n    \"data\": [user_module[0]],\n    \"labels\": [...user_module[1]]\n}]\n\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 560,
+        "wires": [
+            [
+                "02fbaa95f0aee342"
+            ]
+        ]
+    },
+    {
+        "id": "284ffcdc80879529",
+        "type": "ui_template",
+        "z": "1b5f67f7ad635077",
+        "d": true,
+        "group": "3ad2bc4a7ed3c9a3",
+        "name": "top-bar logo",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    #top-bar-logo {\n    background-image: url(https://fenie.es/patrocinador/tempel-group/);\n    background-size: contain;\n    background-repeat: no-repeat;\n    background-position: left;\n    height: 100%;\n    width: 100%;\n}\n</style>\n\n<script id=\"logo-script\" type=\"text/javascript\">\nfunction build(){\n    $(\"#top-bar-logo\").remove()\n    var logo = $('<div />').attr(\"id\",\"top-bar-logo\");\n    var topbar = $('.md-toolbar-tools');\n    topbar.append(logo)\n}\nfunction checkExistence(){\n    console.log($(\"#top-bar-logo\"))\n    if($(\"#top-bar-logo\").length > 0){\n        return\n    }\n    build()\n    setTimeout(checkExistence,100)\n}\n\nbuild()\nsetTimeout(checkExistence,100)\n</script>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 310,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e0510c9c976ecb6a",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "fix_int_format",
+        "func": "const modules = msg.payload\n\nmodules.forEach(module => {\n    for (let key in module) {\n      if (typeof module[key] == 'number' && !isNaN( module[key])) {\n        module[key] = Number(module[key].toFixed(2))\n      }\n    }\n  })\n\nmsg.payload = modules\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1140,
+        "y": 560,
+        "wires": [
+            [
+                "1461699dd230f685",
+                "a2d54372103430a0",
+                "a1245120c2032ae4"
+            ]
+        ]
+    },
+    {
+        "id": "02fbaa95f0aee342",
+        "type": "ui_chart",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "group": "b3b18b46f769a03f",
+        "order": 1,
+        "width": 18,
+        "height": 9,
+        "label": "Voltaje",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1550,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4fa49c9bbfe372a0",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "pop",
+        "func": "msg.payload.pop()\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 260,
+        "wires": [
+            [
+                "d8bb605fc70b7a21"
+            ]
+        ]
+    },
+    {
+        "id": "0b82e01e401b5d92",
+        "type": "file",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "filename": "C:\\Users\\BATECNIC01\\Desktop\\logs.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1680,
+        "y": 340,
+        "wires": [
+            [
+                "90440482bf60250f",
+                "e3ea095958a28e60"
+            ]
+        ]
+    },
+    {
+        "id": "8dd684cd3bd7a538",
+        "type": "file in",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "filename": "C:\\Users\\BATECNIC01\\Desktop\\logs.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1220,
+        "y": 380,
+        "wires": [
+            [
+                "4055d95245713a0d",
+                "50667034f66da734"
+            ]
+        ]
+    },
+    {
+        "id": "50667034f66da734",
+        "type": "debug",
+        "z": "1b5f67f7ad635077",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1740,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "4055d95245713a0d",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "function 1",
+        "func": "let final = []\nlet antiguos_str = msg.payload\nlet nuevos = flow.get(\"module_alarms\")\n\nif (antiguos_str !== '') {\n    let antiguos = JSON.parse(antiguos_str)\n    final.push(...antiguos)\n    final.push(...nuevos) \n} else {\n    final.push(...nuevos)\n    flow.set(\"module_alarms\", final)\n}\n\nmsg.payload = final\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1620,
+        "y": 400,
+        "wires": [
+            [
+                "50667034f66da734",
+                "0b82e01e401b5d92"
+            ]
+        ]
+    },
+    {
+        "id": "44459825e3b1e96d",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "function 2",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1730,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ee3e11782327efe4",
+        "type": "debug",
+        "z": "1b5f67f7ad635077",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "90440482bf60250f",
+        "type": "debug",
+        "z": "1b5f67f7ad635077",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1810,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "f336053cd1051fb1",
+        "type": "debug",
+        "z": "1b5f67f7ad635077",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "520d4d0ab82eab9f",
+        "type": "ui_chart",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "group": "070aacdfb3088368",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1430,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a1245120c2032ae4",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "function 3",
+        "func": "\nmsg.payload = [...msg.payload.cell_volt]\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1280,
+        "y": 640,
+        "wires": [
+            [
+                "520d4d0ab82eab9f"
+            ]
+        ]
     }
 ]
