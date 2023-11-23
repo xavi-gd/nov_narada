@@ -62,38 +62,38 @@
             "customTheme": {
                 "name": "Untitled Theme 1",
                 "default": "#4B7930",
-                "baseColor": "#ffffff",
+                "baseColor": "#808285",
                 "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
                 "reset": false
             },
             "themeState": {
                 "base-color": {
                     "default": "#ffffff",
-                    "value": "#ffffff",
-                    "edited": true
-                },
-                "page-titlebar-backgroundColor": {
                     "value": "#808285",
                     "edited": true
                 },
+                "page-titlebar-backgroundColor": {
+                    "value": "#000000",
+                    "edited": true
+                },
                 "page-backgroundColor": {
-                    "value": "#fafafa",
-                    "edited": false
+                    "value": "#e6e6e6",
+                    "edited": true
                 },
                 "page-sidebar-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
+                    "value": "#000000",
+                    "edited": true
                 },
                 "group-textColor": {
                     "value": "#ffffff",
                     "edited": true
                 },
                 "group-borderColor": {
-                    "value": "#bcbec0",
+                    "value": "#808285",
                     "edited": true
                 },
                 "group-backgroundColor": {
-                    "value": "#bcbec0",
+                    "value": "#808285",
                     "edited": true
                 },
                 "widget-textColor": {
@@ -101,7 +101,7 @@
                     "edited": true
                 },
                 "widget-backgroundColor": {
-                    "value": "#808285",
+                    "value": "#000000",
                     "edited": true
                 },
                 "widget-borderColor": {
@@ -121,19 +121,19 @@
             }
         },
         "site": {
-            "name": "Node-RED Dashboard",
+            "name": "Tempel Group",
             "hideToolbar": "false",
             "allowSwipe": "false",
-            "lockMenu": "false",
+            "lockMenu": "icon",
             "allowTempTheme": "true",
             "dateFormat": "DD/MM/YYYY",
             "sizes": {
                 "sx": 48,
                 "sy": 48,
-                "gx": 10,
-                "gy": 6,
-                "cx": 6,
-                "cy": 6,
+                "gx": 15,
+                "gy": 15,
+                "cx": 3,
+                "cy": 3,
                 "px": 0,
                 "py": 0
             }
@@ -146,18 +146,18 @@
         "tab": "2a94dcf4a197c16a",
         "order": 1,
         "disp": true,
-        "width": 4,
+        "width": 5,
         "collapse": false,
         "className": ""
     },
     {
         "id": "b3b18b46f769a03f",
         "type": "ui_group",
-        "name": "Graficos",
+        "name": "Valores Generales",
         "tab": "2a94dcf4a197c16a",
         "order": 2,
         "disp": true,
-        "width": 18,
+        "width": 15,
         "collapse": false,
         "className": ""
     },
@@ -183,31 +183,22 @@
     {
         "id": "63d44542e6e1ae80",
         "type": "ui_group",
-        "name": "Logs de Alarmas",
+        "name": "Logs",
         "tab": "2a94dcf4a197c16a",
-        "order": 3,
+        "order": 4,
         "disp": true,
         "width": 8,
         "collapse": false,
         "className": ""
     },
     {
-        "id": "4ff41e5b8c1dd25e",
-        "type": "ui_tab",
-        "name": "Cells",
-        "icon": "dashboard",
-        "order": 2,
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "26daf5f7e0a21c1c",
+        "id": "930ebe0a3aa3b551",
         "type": "ui_group",
-        "name": "Celdas",
-        "tab": "4ff41e5b8c1dd25e",
-        "order": 1,
+        "name": "Valores Celdas",
+        "tab": "2a94dcf4a197c16a",
+        "order": 3,
         "disp": true,
-        "width": "6",
+        "width": 15,
         "collapse": false,
         "className": ""
     },
@@ -239,7 +230,7 @@
         "type": "function",
         "z": "1b5f67f7ad635077",
         "name": "toASCII",
-        "func": "msg.payload = msg.payload.toString(\"ascii\")\nreturn msg;",
+        "func": "msg.payload = msg.payload.toString(\"ascii\")\n\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -250,8 +241,7 @@
         "y": 320,
         "wires": [
             [
-                "36c120148f84e607",
-                "f336053cd1051fb1"
+                "5cc4dace4a02bd19"
             ]
         ]
     },
@@ -263,8 +253,8 @@
         "property": "payload",
         "action": "obj",
         "pretty": false,
-        "x": 430,
-        "y": 320,
+        "x": 570,
+        "y": 300,
         "wires": [
             [
                 "0cfb97fd869df32a",
@@ -353,7 +343,8 @@
         "y": 560,
         "wires": [
             [
-                "f9aa32fd91fe5564"
+                "f9aa32fd91fe5564",
+                "5e91f5f1e9171fc5"
             ]
         ]
     },
@@ -472,10 +463,10 @@
         "type": "ui_table",
         "z": "1b5f67f7ad635077",
         "group": "b3b18b46f769a03f",
-        "name": "Tabla",
+        "name": "Tabla Modulos",
         "order": 2,
-        "width": 18,
-        "height": 4,
+        "width": 15,
+        "height": 3,
         "columns": [
             {
                 "field": "time",
@@ -559,7 +550,7 @@
             },
             {
                 "field": "remain_capacity",
-                "title": "Carga",
+                "title": "remain cap",
                 "width": "",
                 "align": "left",
                 "formatter": "plaintext",
@@ -588,11 +579,13 @@
                 }
             }
         ],
-        "outputs": 0,
-        "cts": false,
-        "x": 1330,
+        "outputs": 1,
+        "cts": true,
+        "x": 1160,
         "y": 500,
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "0226e4b052c6765c",
@@ -600,7 +593,7 @@
         "z": "1b5f67f7ad635077",
         "name": "",
         "group": "070aacdfb3088368",
-        "order": 4,
+        "order": 5,
         "width": 0,
         "height": 0,
         "passthru": true,
@@ -750,10 +743,10 @@
         "type": "ui_table",
         "z": "1b5f67f7ad635077",
         "group": "63d44542e6e1ae80",
-        "name": "Registro de Alarmas",
+        "name": "Tabla Protecciones",
         "order": 1,
         "width": 8,
-        "height": 4,
+        "height": 6,
         "columns": [
             {
                 "field": "time",
@@ -788,8 +781,8 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 1900,
-        "y": 400,
+        "x": 1750,
+        "y": 460,
         "wires": []
     },
     {
@@ -808,8 +801,7 @@
         "y": 260,
         "wires": [
             [
-                "bb2f5f81325c3433",
-                "ee3e11782327efe4"
+                "bb2f5f81325c3433"
             ]
         ]
     },
@@ -828,16 +820,6 @@
         "dname": "",
         "x": 1400,
         "y": 200,
-        "wires": []
-    },
-    {
-        "id": "d0d59e1ca522a234",
-        "type": "comment",
-        "z": "1b5f67f7ad635077",
-        "name": "USUARIO",
-        "info": "",
-        "x": 100,
-        "y": 40,
         "wires": []
     },
     {
@@ -864,8 +846,8 @@
         "id": "f9aa32fd91fe5564",
         "type": "function",
         "z": "1b5f67f7ad635077",
-        "name": "timestamp_to_date",
-        "func": "msg.payload.forEach(module => {\n    let fecha = new Date(module.time * 1000); // Convierte el timestamp a milisegundos\n    let horas = (\"0\" + fecha.getHours()).slice(-2); // Obtiene las horas con dos dígitos\n    let minutos = (\"0\" + fecha.getMinutes()).slice(-2); // Obtiene los minutos con dos dígitos\n    module.time = horas + \":\" + minutos; // Modifica el atributo time con el formato HH:MM\n  })\n\nreturn msg",
+        "name": "timestamp_to_time",
+        "func": "msg.payload.forEach(module => {\n    let fecha = new Date(module.time * 1000);\n    let horas = (\"0\" + fecha.getHours()).slice(-2); \n    let minutos = (\"0\" + fecha.getMinutes()).slice(-2); \n    module.time = horas + \":\" + minutos; \n  })\n\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -876,7 +858,10 @@
         "y": 560,
         "wires": [
             [
-                "e0510c9c976ecb6a"
+                "1461699dd230f685",
+                "a2d54372103430a0",
+                "e633fe969143a6d2",
+                "5e04db8f355bc83c"
             ]
         ]
     },
@@ -885,7 +870,7 @@
         "type": "function",
         "z": "1b5f67f7ad635077",
         "name": "timestamp_to_date",
-        "func": "msg.payload.forEach(module => {\n    let fecha = new Date(module.time * 1000); // Convierte el timestamp a milisegundos\n    let horas = (\"0\" + fecha.getHours()).slice(-2); // Obtiene las horas con dos dígitos\n    let minutos = (\"0\" + fecha.getMinutes()).slice(-2); // Obtiene los minutos con dos dígitos\n    module.time = horas + \":\" + minutos; // Modifica el atributo time con el formato HH:MM\n  })\n\nreturn msg",
+        "func": "msg.payload.forEach(module => {\n    let fecha = new Date(module.time * 1000)\n    let day = (\"0\" + fecha.getDate()).slice(-2)\n    let month = (\"0\" + (fecha.getMonth() + 1)).slice(-2)\n    let year = fecha.getFullYear()\n    let hours = (\"0\" + fecha.getHours()).slice(-2)\n    let minutes = (\"0\" + fecha.getMinutes()).slice(-2)\n      \n    module.time = `${hours}:${minutes} ${day}/${month}/${year}`\n  })\n\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -923,8 +908,7 @@
         "y": 260,
         "wires": [
             [
-                "8dd684cd3bd7a538",
-                "ee3e11782327efe4"
+                "8dd684cd3bd7a538"
             ]
         ]
     },
@@ -933,14 +917,14 @@
         "type": "function",
         "z": "1b5f67f7ad635077",
         "name": "module_chart_data",
-        "func": "function set_chart_values(arrayDeArrays) {\n    const volt = [], time = []\n\n    for (const objeto of arrayDeArrays) {\n        volt.push(objeto.volt)\n        time.push(objeto.time)\n    }\n    return [volt, time]\n}\n\nconst user_module = set_chart_values(msg.payload)\n\nmsg.payload=[{\n    \"series\": [\"Volt\"],\n    \"data\": [user_module[0]],\n    \"labels\": [...user_module[1]]\n}]\n\n\nreturn msg",
+        "func": "function set_chart_values(arrayDeArrays) {\n    const soc = [], soh = [], time = []\n\n    for (const objeto of arrayDeArrays) {\n        soc.push(objeto.soc)\n        soh.push(objeto.soh)\n        time.push(objeto.time)\n    }\n    return [soc, soh, time]\n}\n\nconst user_module = set_chart_values(msg.payload)\n\nmsg.payload=[{\n    \"series\": [\"SOC\", \"SOH\"],\n    \"data\": [user_module[0], user_module[1]],\n    \"labels\": [...user_module[2]]\n}]\n\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1370,
+        "x": 1170,
         "y": 560,
         "wires": [
             [
@@ -971,45 +955,23 @@
         ]
     },
     {
-        "id": "e0510c9c976ecb6a",
-        "type": "function",
-        "z": "1b5f67f7ad635077",
-        "name": "fix_int_format",
-        "func": "const modules = msg.payload\n\nmodules.forEach(module => {\n    for (let key in module) {\n      if (typeof module[key] == 'number' && !isNaN( module[key])) {\n        module[key] = Number(module[key].toFixed(2))\n      }\n    }\n  })\n\nmsg.payload = modules\nreturn msg",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1140,
-        "y": 560,
-        "wires": [
-            [
-                "1461699dd230f685",
-                "a2d54372103430a0",
-                "a1245120c2032ae4"
-            ]
-        ]
-    },
-    {
         "id": "02fbaa95f0aee342",
         "type": "ui_chart",
         "z": "1b5f67f7ad635077",
-        "name": "",
+        "name": "Grafica SOC y SOH",
         "group": "b3b18b46f769a03f",
         "order": 1,
-        "width": 18,
-        "height": 9,
-        "label": "Voltaje",
+        "width": 15,
+        "height": 6,
+        "label": "SOC vs SOH",
         "chartType": "line",
         "legend": "false",
         "xformat": "HH:mm:ss",
         "interpolate": "linear",
         "nodata": "",
         "dot": true,
-        "ymin": "",
-        "ymax": "",
+        "ymin": "0",
+        "ymax": "100",
         "removeOlder": 1,
         "removeOlderPoints": "",
         "removeOlderUnit": "3600",
@@ -1018,7 +980,7 @@
         "useUTC": false,
         "colors": [
             "#1f77b4",
-            "#aec7e8",
+            "#2ca02c",
             "#ff7f0e",
             "#2ca02c",
             "#98df8a",
@@ -1030,7 +992,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 1550,
+        "x": 1400,
         "y": 560,
         "wires": [
             []
@@ -1067,11 +1029,10 @@
         "createDir": false,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 1680,
-        "y": 340,
+        "x": 1820,
+        "y": 360,
         "wires": [
             [
-                "90440482bf60250f",
                 "e3ea095958a28e60"
             ]
         ]
@@ -1088,37 +1049,19 @@
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 1220,
-        "y": 380,
+        "x": 1820,
+        "y": 260,
         "wires": [
             [
-                "4055d95245713a0d",
-                "50667034f66da734"
+                "4055d95245713a0d"
             ]
         ]
-    },
-    {
-        "id": "50667034f66da734",
-        "type": "debug",
-        "z": "1b5f67f7ad635077",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1740,
-        "y": 460,
-        "wires": []
     },
     {
         "id": "4055d95245713a0d",
         "type": "function",
         "z": "1b5f67f7ad635077",
-        "name": "function 1",
+        "name": "ger_module_alarms",
         "func": "let final = []\nlet antiguos_str = msg.payload\nlet nuevos = flow.get(\"module_alarms\")\n\nif (antiguos_str !== '') {\n    let antiguos = JSON.parse(antiguos_str)\n    final.push(...antiguos)\n    final.push(...nuevos) \n} else {\n    final.push(...nuevos)\n    flow.set(\"module_alarms\", final)\n}\n\nmsg.payload = final\nreturn msg",
         "outputs": 1,
         "timeout": 0,
@@ -1126,69 +1069,176 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1620,
-        "y": 400,
+        "x": 1500,
+        "y": 360,
         "wires": [
             [
-                "50667034f66da734",
                 "0b82e01e401b5d92"
             ]
         ]
     },
     {
-        "id": "44459825e3b1e96d",
+        "id": "09c4108a4d798d5a",
+        "type": "yaml",
+        "z": "1b5f67f7ad635077",
+        "property": "payload",
+        "name": "",
+        "x": 1230,
+        "y": 760,
+        "wires": [
+            [
+                "45d2d6c1c0caaba1"
+            ]
+        ]
+    },
+    {
+        "id": "621356eac826751c",
+        "type": "ui_button",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "group": "63d44542e6e1ae80",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "Exportar",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "export_module",
+        "payloadType": "flow",
+        "topic": "user_module",
+        "topicType": "flow",
+        "x": 740,
+        "y": 760,
+        "wires": [
+            [
+                "21df56237681939c"
+            ]
+        ]
+    },
+    {
+        "id": "5e91f5f1e9171fc5",
         "type": "function",
         "z": "1b5f67f7ad635077",
-        "name": "function 2",
-        "func": "\nreturn msg;",
+        "name": "timestamp_to_date",
+        "func": "msg.payload.forEach(module => {\n    let fecha = new Date(module.time * 1000)\n    let day = (\"0\" + fecha.getDate()).slice(-2)\n    let month = (\"0\" + (fecha.getMonth() + 1)).slice(-2)\n    let year = fecha.getFullYear()\n    let hours = (\"0\" + fecha.getHours()).slice(-2)\n    let minutes = (\"0\" + fecha.getMinutes()).slice(-2)\n      \n    module.time = `${hours}:${minutes} ${day}/${month}/${year}`\n  })\n\nreturn msg",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1730,
-        "y": 280,
+        "x": 910,
+        "y": 620,
+        "wires": [
+            [
+                "eeecfe4cc6c6426b"
+            ]
+        ]
+    },
+    {
+        "id": "eeecfe4cc6c6426b",
+        "type": "change",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "export_module",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1180,
+        "y": 620,
         "wires": [
             []
         ]
     },
     {
-        "id": "ee3e11782327efe4",
-        "type": "debug",
+        "id": "45d2d6c1c0caaba1",
+        "type": "file",
         "z": "1b5f67f7ad635077",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1560,
-        "y": 100,
-        "wires": []
+        "name": "",
+        "filename": "C:\\Users\\BATECNIC01\\Desktop\\export_module.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1530,
+        "y": 760,
+        "wires": [
+            []
+        ]
     },
     {
-        "id": "90440482bf60250f",
-        "type": "debug",
+        "id": "21df56237681939c",
+        "type": "change",
         "z": "1b5f67f7ad635077",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1810,
-        "y": 180,
-        "wires": []
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload[0]._id",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 990,
+        "y": 760,
+        "wires": [
+            [
+                "09c4108a4d798d5a"
+            ]
+        ]
     },
     {
-        "id": "f336053cd1051fb1",
+        "id": "5cc4dace4a02bd19",
+        "type": "switch",
+        "z": "1b5f67f7ad635077",
+        "name": "info_or_values",
+        "property": "payload[1]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "{",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 420,
+        "y": 300,
+        "wires": [
+            [
+                "8a853f66af92a2d5"
+            ],
+            [
+                "36c120148f84e607"
+            ]
+        ]
+    },
+    {
+        "id": "8a853f66af92a2d5",
         "type": "debug",
         "z": "1b5f67f7ad635077",
         "name": "debug 4",
@@ -1199,72 +1249,161 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 420,
-        "y": 400,
+        "x": 570,
+        "y": 180,
         "wires": []
     },
     {
-        "id": "520d4d0ab82eab9f",
-        "type": "ui_chart",
-        "z": "1b5f67f7ad635077",
-        "name": "",
-        "group": "070aacdfb3088368",
-        "order": 4,
-        "width": 0,
-        "height": 0,
-        "label": "chart",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": false,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#aec7e8",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 1430,
-        "y": 700,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "a1245120c2032ae4",
+        "id": "1b95c0e2c4610659",
         "type": "function",
         "z": "1b5f67f7ad635077",
-        "name": "function 3",
-        "func": "\nmsg.payload = [...msg.payload.cell_volt]\nreturn msg",
+        "name": "function 1",
+        "func": "let objeto = {};\n\nfor (let i = 0; i < msg.payload.length; i++) {\n  objeto[i + 1] = msg.payload[i];\n}\n\nmsg.payload = [objeto]\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1280,
-        "y": 640,
+        "x": 1700,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "80f01ebbbac3ac37",
+        "type": "ui_ui_control",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "events": "change",
+        "x": 460,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4b6e8f0721ad2a10",
+        "type": "ui_switch",
+        "z": "1b5f67f7ad635077",
+        "name": "",
+        "label": "Celdas",
+        "tooltip": "",
+        "group": "070aacdfb3088368",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "{\"group\":{\"hide\":[\"Tempel_Group_Valores_Generales\"],\"show\":[\"Tempel_Group_Valores_Celdas\"]}}",
+        "onvalueType": "json",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "{\"group\":{\"hide\":[\"Tempel_Group_Valores_Celdas\"],\"show\":[\"Tempel_Group_Valores_Generales\"]}}",
+        "offvalueType": "json",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 300,
+        "y": 720,
         "wires": [
             [
-                "520d4d0ab82eab9f"
+                "80f01ebbbac3ac37"
             ]
         ]
+    },
+    {
+        "id": "9e995929a4369842",
+        "type": "ui_table",
+        "z": "1b5f67f7ad635077",
+        "group": "930ebe0a3aa3b551",
+        "name": "Tabla Celdas",
+        "order": 1,
+        "width": 15,
+        "height": 6,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 470,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "df441e593d0d3023",
+        "type": "ui_text",
+        "z": "1b5f67f7ad635077",
+        "group": "070aacdfb3088368",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 470,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "e633fe969143a6d2",
+        "type": "function",
+        "z": "1b5f67f7ad635077",
+        "name": "function 2",
+        "func": "\nconst array = msg.payload.map(objeto => objeto.cell_volt)\n\nmsg.payload = array\n\n\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1140,
+        "y": 440,
+        "wires": [
+            [
+                "45823e43ce7dd3c4"
+            ]
+        ]
+    },
+    {
+        "id": "45823e43ce7dd3c4",
+        "type": "debug",
+        "z": "1b5f67f7ad635077",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "5e04db8f355bc83c",
+        "type": "debug",
+        "z": "1b5f67f7ad635077",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1170,
+        "y": 360,
+        "wires": []
     }
 ]
