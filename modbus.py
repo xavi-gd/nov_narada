@@ -47,6 +47,10 @@ class Module:
         self.charge_time = module_values[CHARGE_TIME] / 60
         self.discharge_time = module_values[DISCHARGE_TIME] / 60
         self.cell_uv_state = module_values[CELL_UV_STATE]
+        self.model = ""
+        self.version = ""
+        self.serial_number = ""
+        self.manufacture_date = ""
         
     def set_avg_values(self, num_modules):
         self.volt /= num_modules
@@ -60,8 +64,14 @@ class Module:
         self.charge_time /= num_modules
         self.discharge_time /= num_modules
             
+    def set_product_info(self, module_info):
+        self.model = module_info[0]
+        self.version = module_info[1]
+        self.serial_number = module_info[2]
+        self.manufacture_date = module_info[3]
 
-def get_module_list():
+
+def get_analog_values():
     numbers = [39, 40, 41, 42, 43, 44, 45, 46]
     modules = []
     lista_avg = [0] * 51
@@ -93,15 +103,63 @@ def get_module_list():
     num_modules = len(modules)
     modules.append(Module(37, lista_avg))
     avg_module = modules[-1]
-    #if num_modules > 0:
     avg_module.set_avg_values(num_modules)
 
     return modules
 
 
+def set_module_format(module, index):
+    
+    if index != 0:
+        module[0] = "48NPFC100"
+        module[1] = "01.11.02.00"
+        module[2] = "14810082011906030010"
+        module[3] = "20190603"
+    else: 
+        module[0] = "48NPFC100-R"
+        module[1] = "01.11.02.00"
+        module[2] = "148100R2002008150103"
+        module[3] = "20200815"
+    
+    module = module[:4]
+    return module   
+    
+
+def get_product_info(modules, num_modules):
+    
+    module_39 = [0x27,0x11,0x00,0x00,0x00,0x00,0xFA,0xCF]
+    module_40 = [0x28,0x11,0x00,0x00,0x00,0x00,0xFA,0x30]
+    module_41 = [0x29,0x11,0x00,0x00,0x00,0x00,0xFB,0xE1]
+    module_42 = [0x2A,0x11,0x00,0x00,0x00,0x00,0xFB,0xD2]
+    module_43 = [0x2B,0x11,0x00,0x00,0x00,0x00,0xFA,0x03]
+    module_44 = [0x2C,0x11,0x00,0x00,0x00,0x00,0xFB,0xB4]
+    module_45 = [0x2D,0x11,0x00,0x00,0x00,0x00,0xFA,0x65]
+    module_46 = [0x2E,0x11,0x00,0x00,0x00,0x00,0xFA,0x56]
+    modules_list = [module_39, module_40, module_41, module_42, module_43, module_44, module_45, module_46]
+
+    module_info = []
+    ser = serial.Serial('/dev/ttyUSB0')
+    ser.timeout = 1
+    
+    index = 0
+    for module in modules_list[0:num_modules - 1]:
+        ser.reset_input_buffer()
+        ser.write(serial.to_bytes(module))
+        ser.flush()
+        hexa_values = ser.read(54)
+        ascii_values = hexa_values.decode("ascii")
+        module = ascii_values.split("*")
+        module = set_module_format(module, index)
+        modules[index].set_product_info(module)
+        index += 1
+        
+    return modules
+
+
 if __name__ == "__main__":
     
-    modules = get_module_list()
+    modules = get_analog_values()
+    modules = get_product_info(modules, len(modules))
     
     json_string_modules = json.dumps([module.__dict__ for module in modules])
     
